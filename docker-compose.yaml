@@ -1,0 +1,31 @@
+---
+version: "3.8"
+services:
+  lms:
+    image: lms:8.0
+    cap_drop:
+      - ALL
+    container_name: lms
+    mem_limit: 0.5g
+    ports:
+      - 3483:3483
+      - 3483:3483/udp
+      - 9000:9000
+    read_only: true
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /mnt/lms:/config:rw
+      - /mnt/HDD/Musique:/music:ro
+    tmpfs: /tmp
+    restart: unless-stopped
+    networks:
+      net0:
+        ipv4_address: 172.20.0.2
+
+networks:
+  net0:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.0/30
