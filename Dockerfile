@@ -1,6 +1,5 @@
-FROM ubuntu:latest
+FROM ubuntu:20.04
 
-ARG BUILD
 ARG LMS_VERSION=8.0
 ARG LMS_SUB_VERSION=0
 ARG PACKAGE_VERSION_URL=http://www.mysqueezebox.com/update/?version=8.0.0&revision=1&geturl=1&os=deb
@@ -10,13 +9,15 @@ ENV LANG=en_US.UTF-8 \
     LANGUAGE=en_US:en \
     LC_ALL=en_US.UTF-8
 
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
 RUN apt-get update \
     && apt-get -y --no-install-recommends install faad ffmpeg flac lame libgomp1 libio-socket-ssl-perl libsox-fmt-all sox wavpack \
     && apt-get -y -u dist-upgrade \
-    && apt-get -y install ca-certificates curl locales \
+    && apt-get -y install --no-install-recommends ca-certificates curl locales \
     && locale-gen en_US.UTF-8 \
-    && url=$(curl "$PACKAGE_VERSION_URL" | sed 's/_all\.deb/_amd64\.deb/') \
-    && curl -Lsf $url -o /tmp/lms.deb \
+    && url=$(curl "${PACKAGE_VERSION_URL}" | sed 's/_all\.deb/_amd64\.deb/') \
+    && curl -Lsf "${url}" -o /tmp/lms.deb \
     && dpkg -i /tmp/lms.deb \
     && rm /tmp/lms.deb \
     && mkdir /config /music \
