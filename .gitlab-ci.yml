@@ -1,0 +1,64 @@
+variables:
+  CI_IMAGE: $REGISTRY/$REGISTRY_USER/$CI_PROJECT_NAME
+  CI_BUILD_ARCHS: linux/amd64,linux/arm64,linux/arm/v7
+
+stages:
+  - lint
+  - build
+  - push
+
+hadolint:
+  stage: lint
+  image: hadolint/hadolint
+  script:
+    - hadolint
+        --ignore DL3008
+        Dockerfile
+
+.before_script_template:
+  before_script:
+    - echo -n $REGISTRY_TOKEN | docker login -u $REGISTRY_USER --password-stdin $REGISTRY
+    - docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+    - docker buildx create --use
+
+.build-image: &build-image
+  extends: .before_script_template
+  image: jdrouet/docker-with-buildx:latest
+  stage: build
+  except:
+    - master
+  services:
+    - docker:dind
+  script:
+    - docker buildx build
+      --platform "$CI_BUILD_ARCHS"
+      --cache-from "$CI_IMAGE"
+      --build-arg BUILDKIT_INLINE_CACHE=1
+      --pull --tag "$CI_IMAGE:$CI_COMMIT_REF_SLUG" .
+
+.push-image: &push-image
+  extends: .before_script_template
+  image: jdrouet/docker-with-buildx:latest
+  stage: push
+  only:
+    - master
+  services:
+    - docker:dind
+  script:
+    - docker buildx build
+      --platform "$CI_BUILD_ARCHS"
+      --cache-from "$CI_IMAGE"
+      --build-arg BUILDKIT_INLINE_CACHE=1
+      --pull --tag "$CI_IMAGE:$TAG_NAME" --push .
+
+###########
+# LMS 8.0 #
+###########
+
+build 8.0:
+  <<: *build-image
+
+push 8.0:
+  <<: *push-image
+  variables:
+    TAG_NAME: "8.0"
