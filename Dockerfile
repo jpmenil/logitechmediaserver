@@ -1,8 +1,7 @@
 FROM ubuntu:20.04
 
-ARG LMS_VERSION=8.0
-ARG LMS_SUB_VERSION=0
-ARG PACKAGE_VERSION_URL=http://www.mysqueezebox.com/update/?version=8.0.0&revision=1&geturl=1&os=deb
+ARG LMS_VERSION=8.1
+ARG PACKAGE_VERSION_URL=http://www.mysqueezebox.com/update/?version="${LMS_VERSION}"&revision=1&geturl=1&os=deb
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV LANG=en_US.UTF-8 \
@@ -16,7 +15,7 @@ RUN apt-get update \
     && apt-get -y -u dist-upgrade \
     && apt-get -y install --no-install-recommends ca-certificates curl locales \
     && locale-gen en_US.UTF-8 \
-    && url=$(curl "${PACKAGE_VERSION_URL}" | sed 's/_all\.deb/_amd64\.deb/') \
+    && url=$(curl "${PACKAGE_VERSION_URL}") \
     && curl -Lsf "${url}" -o /tmp/lms.deb \
     && dpkg -i /tmp/lms.deb \
     && rm /tmp/lms.deb \
