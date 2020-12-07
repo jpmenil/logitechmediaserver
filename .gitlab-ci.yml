@@ -52,13 +52,13 @@ hadolint:
       --pull --tag "$CI_IMAGE:$TAG_NAME" --push .
 
 ###########
-# LMS 8.0 #
+# LMS 8.1 #
 ###########
 
-build 8.0:
+build 8.1:
   <<: *build-image
 
-push 8.0:
+push 8.1:
   <<: *push-image
   variables:
-    TAG_NAME: "8.0"
+    TAG_NAME: "8.1"
