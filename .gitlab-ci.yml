@@ -62,3 +62,15 @@ push 8.1:
   <<: *push-image
   variables:
     TAG_NAME: "8.1"
+
+###########
+# LMS 8.2 #
+###########
+
+build 8.2:
+  <<: *build-image
+
+push 8.2:
+  <<: *push-image
+  variables:
+    TAG_NAME: "8.2"
