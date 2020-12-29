@@ -34,6 +34,7 @@ hadolint:
       --platform "$CI_BUILD_ARCHS"
       --cache-from "$CI_IMAGE"
       --build-arg BUILDKIT_INLINE_CACHE=1
+      --build-arg RELEASE=$RELEASE
       --pull --tag "$CI_IMAGE:$CI_COMMIT_REF_SLUG" .
 
 .push-image: &push-image
@@ -49,6 +50,7 @@ hadolint:
       --platform "$CI_BUILD_ARCHS"
       --cache-from "$CI_IMAGE"
       --build-arg BUILDKIT_INLINE_CACHE=1
+      --build-arg RELEASE=$TAG_NAME
       --pull --tag "$CI_IMAGE:$TAG_NAME" --push .
 
 ###########
@@ -57,6 +59,8 @@ hadolint:
 
 build 8.1:
   <<: *build-image
+  variables:
+    RELEASE: "8.1"
 
 push 8.1:
   <<: *push-image
@@ -69,6 +73,8 @@ push 8.1:
 
 build 8.2:
   <<: *build-image
+  variables:
+    RELEASE: "8.2"
 
 push 8.2:
   <<: *push-image
