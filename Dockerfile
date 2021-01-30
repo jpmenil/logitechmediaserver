@@ -20,7 +20,6 @@ RUN apt-get update \
         libsox-fmt-all \
         sox \
         wavpack \
-    && apt-get -y -u dist-upgrade \
     && apt-get -y install --no-install-recommends ca-certificates curl locales \
     && locale-gen en_US.UTF-8 \
     && RELEASE_FILE=$(curl -vLsf -o - "${BASE_URL}?ver=${RELEASE}" | grep _amd64.deb | sed -e '$!d' -e 's/.*href="//' -e 's/".*//') \
