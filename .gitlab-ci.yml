@@ -57,15 +57,15 @@ hadolint:
 # LMS 8.1 #
 ###########
 
-build 8.1:
-  <<: *build-image
-  variables:
-    RELEASE: "8.1"
-
-push 8.1:
-  <<: *push-image
-  variables:
-    TAG_NAME: "8.1"
+#build 8.1:
+#  <<: *build-image
+#  variables:
+#    RELEASE: "8.1"
+#
+#push 8.1:
+#  <<: *push-image
+#  variables:
+#    TAG_NAME: "8.1"
 
 ###########
 # LMS 8.2 #
