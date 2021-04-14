@@ -9,7 +9,7 @@ stages:
 
 hadolint:
   stage: lint
-  image: hadolint/hadolint
+  image: hadolint/hadolint:latest-debian
   script:
     - hadolint
         --ignore DL3008
