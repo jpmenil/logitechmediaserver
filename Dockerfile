@@ -17,6 +17,7 @@ RUN apt-get update \
         lame \
         libgomp1 \
         libio-socket-ssl-perl \
+        libopusfile0 \
         libsox-fmt-all \
         sox \
         wavpack \
