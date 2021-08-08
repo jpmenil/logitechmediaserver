@@ -1,7 +1,7 @@
 FROM ubuntu:20.04
 
 ARG BASE_URL=http://downloads.slimdevices.com/nightly/
-ARG RELEASE=8.2
+ARG RELEASE=8.3
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV LANG=en_US.UTF-8 \
