@@ -15,6 +15,7 @@ RUN apt-get update \
         ffmpeg \
         flac \
         lame \
+        libcrypt-openssl-rsa-perl \
         libgomp1 \
         libio-socket-ssl-perl \
         libopusfile0 \
