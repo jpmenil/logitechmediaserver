@@ -2,7 +2,7 @@
 
 A docker Logitech Media Server
 
-For running the docker-compse as a systemd Unit, refer to the following:
+For running the docker-compose as a systemd Unit, refer to the following:
 https://github.com/docker/compose/issues/4266#issuecomment-302813256
 
 N.b:
