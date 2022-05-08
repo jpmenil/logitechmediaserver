@@ -11,7 +11,8 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN apt-get update \
     && apt-get -y install --no-install-recommends locales \
     && locale-gen en_US.UTF-8 \
-    && apt-get -y --no-install-recommends install faad \
+    && apt-get -y --no-install-recommends install espeak \
+        faad \
         ffmpeg \
         flac \
         lame \
