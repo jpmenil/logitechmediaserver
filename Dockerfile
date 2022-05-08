@@ -1,4 +1,4 @@
-FROM ubuntu:21.04
+FROM ubuntu:22.04
 
 ARG ARCH=amd64
 ARG BASE_URL=http://downloads.slimdevices.com/nightly/
