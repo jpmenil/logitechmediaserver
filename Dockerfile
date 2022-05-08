@@ -33,6 +33,9 @@ RUN apt-get update \
     && chown squeezeboxserver:nogroup /config /music \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+# STS Profiles
+ADD https://www.nexus0.net/pub/sw/lmsannounce/dist/la-ttsprofiles.json /usr/local/etc/
+
 ENV LANG=en_US.UTF-8 \
     LANGUAGE=en_US:en \
     LC_ALL=en_US.UTF-8
