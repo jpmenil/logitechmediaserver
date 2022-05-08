@@ -54,32 +54,18 @@ hadolint:
       --pull --tag "$CI_IMAGE:$TAG_NAME" --push .
 
 ###########
-# LMS 8.1 #
-###########
-
-#build 8.1:
-#  <<: *build-image
-#  variables:
-#    RELEASE: "8.1"
-
-#push 8.1:
-#  <<: *push-image
-#  variables:
-#    TAG_NAME: "8.1"
-
-###########
 # LMS 8.2 #
 ###########
 
-build 8.2:
-  <<: *build-image
-  variables:
-    RELEASE: "8.2"
+# build 8.2:
+#   <<: *build-image
+#   variables:
+#     RELEASE: "8.2"
 
-push 8.2:
-  <<: *push-image
-  variables:
-    TAG_NAME: "8.2"
+# push 8.2:
+#   <<: *push-image
+#   variables:
+#     TAG_NAME: "8.2"
 
 ###########
 # lms 8.3 #
