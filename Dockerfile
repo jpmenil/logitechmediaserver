@@ -12,17 +12,18 @@ RUN apt-get update \
     && apt-get -y install --no-install-recommends locales \
     && locale-gen en_US.UTF-8 \
     && apt-get -y --no-install-recommends install espeak \
-        faad \
-        ffmpeg \
-        flac \
-        lame \
-        libcrypt-openssl-rsa-perl \
-        libgomp1 \
-        libio-socket-ssl-perl \
-        libopusfile0 \
-        libsox-fmt-all \
-        sox \
-        wavpack \
+    faad \
+    ffmpeg \
+    flac \
+    lame \
+    libcrypt-openssl-rsa-perl \
+    libcryptx-perl \
+    libgomp1 \
+    libio-socket-ssl-perl \
+    libopusfile0 \
+    libsox-fmt-all \
+    sox \
+    wavpack \
     && apt-get -y install --no-install-recommends ca-certificates curl \
     && if ! [ "${ARCH##*"arm"*}" ]; then ARCH="arm"; fi \
     && RELEASE_FILE=$(curl -Lsf -o - "${BASE_URL}?ver=${RELEASE}" | grep "${ARCH}".deb | sed -e '$!d' -e 's/.*href="//' -e 's/".*//') \
